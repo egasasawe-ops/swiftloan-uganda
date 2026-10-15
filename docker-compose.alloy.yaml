@@ -1,0 +1,13 @@
+services:
+  site:
+    image: node:22-bookworm
+    working_dir: /workspace
+    network_mode: host
+    volumes:
+      - .:/workspace
+    environment:
+      IS_ALLOY: ${IS_ALLOY:-false}
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}
+      TELEGRAM_CHAT_ID: ${TELEGRAM_CHAT_ID:-}
+      NETLIFY_TELEMETRY_DISABLED: "1"
+    command: bash -lc "npx -y netlify-cli@17 dev --offline --port 8888 --dir . --no-open"
